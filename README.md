@@ -1,7 +1,7 @@
 rss2ical
 ========
 
-convert RSS feed to iCal for importing RSS/Atom feeds in calendar solutions easily
+convert [RSS](http://tools.ietf.org/html/rfc5005) to [iCal](http://tools.ietf.org/html/rfc5545) for importing RSS/Atom feeds in calendar solutions easily
 
 * code: [RSS2iCal on github](https://github.com/s72785/rss2ical/)
 * demo: [webservice for any RSS feed to be converted](http://www2.htw-dresden.de/~s72785/rss2ical.php)
