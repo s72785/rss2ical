@@ -12,7 +12,9 @@ I got started with a copy from [Edward Swindelles](http://subversion.assembla.co
 
 Known contributors:
 
+* Noel David Jackson (noel@noeljackson.com)
 * 2002-2003 Edward Swindelles (ed@readinged.com)
+* Dean Sanvitale @2003
 
 Liberties and duties - about the License
 ----------------------------------------
