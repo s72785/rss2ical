@@ -1,41 +1,11 @@
 <?php
 
-header("Expires: " . gmdate("D, d M Y H:i:s", 0) . " GMT"); 
+header("Expires: " . gmdate("D, d M Y H:i:s", 0) . " GMT");
 
-// RSS2iCal by Dean Sanvitale @2003
-// My version displays one event per item with specific dates for each item
-// Code used from RSSiCal Version 0.8.3 by Noel David Jackson (noel@noeljackson.com)
-// RSS Parser by Edward Swindelles (ed@readinged.com)
-//
-
-//include("rssical/parseRSS.php");
-
-
-////////////////////////////////////////////////////////////
-//RSS Parser included inline for easy distribution
-
-/* Copyright 2002-2003 Edward Swindelles (ed@readinged.com)
- *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-*/
-
-/* Default settings, you may change them at your whim.  See README. */
+/* Default settings, you may change them at your whim. See README. */
 $rss_cache_path         = '';
 $rss_default_cache_time = 180;
 $rss_debug_mode         = true;
-
 
 /* Private variables, do not change. */
 $rss_contents           = array();
@@ -93,9 +63,9 @@ function stream_last_modified($url)
 
 function parseRSS($url, $cache_file=NULL, $cache_time=NULL)
 {
-	global   $rss_contents, $rss_default_cache_time, $rss_isTextInput,
-		 $rss_cache_path, $rss_cache_age, $rss_tag, $rss_isImage,
-		 $rss_isItem, $rss_isChannel, $rss_index, $rss_debug_mode;
+	global $rss_contents, $rss_default_cache_time, $rss_isTextInput,
+		$rss_cache_path, $rss_cache_age, $rss_tag, $rss_isImage,
+		$rss_isItem, $rss_isChannel, $rss_index, $rss_debug_mode;
 
 	$rss_error = '<br /><strong>Error on line %s of '.__FILE__.'</strong>: %s<br />';
 
@@ -131,13 +101,14 @@ function parseRSS($url, $cache_file=NULL, $cache_time=NULL)
 	}
 
 	if (is_null($cache_file) ||
-	   (!is_null($cache_file) && !file_exists($cache_file)) ||
-	   (!is_null($cache_file) && file_exists($cache_file) && $rss_cache_age > $cache_time && $remotemodtime > ((time()) - ($rss_cache_age * 60))))
+		(!is_null($cache_file) && !file_exists($cache_file)) ||
+		(!is_null($cache_file) && file_exists($cache_file) && $rss_cache_age > $cache_time && $remotemodtime > ((time()) - ($rss_cache_age * 60)))
+	)
 	{
-		$rss_tag     = '';
-		$rss_isItem  = false;
+		$rss_tag       = '';
+		$rss_isItem    = false;
 		$rss_isChannel = false;
-		$rss_index   = 0;
+		$rss_index     = 0;
 
 		$saxparser = @xml_parser_create();
 		if (!is_resource($saxparser))
@@ -181,7 +152,7 @@ function parseRSS($url, $cache_file=NULL, $cache_time=NULL)
 			if (!($cache = @fopen($cache_file, 'w')))
 			{
 				if ($rss_debug_mode)
-					printf($rss_error, (__LINE__-3), 'Could not right to cache file (<em>'.$cache_file.'</em>).  The path may be invalid or you may not have write permissions.');
+					printf($rss_error, (__LINE__-3), 'Could not right to cache file (<em>'.$cache_file.'</em>). The path may be invalid or you may not have write permissions.');
 
 				return false;
 			}
@@ -253,7 +224,7 @@ function sax_data($parser, $data)
 				$rss_contents['channel'][$rss_tag] = $data :
 				$rss_contents['channel'][$rss_tag].= $data ;
 		elseif ($rss_isItem && strlen($data))
-			(!isset($rss_contents[$rss_index-1][$rss_tag]) || !strlen($rss_contents[$rss_index-1][$rss_tag])) ? 
+			(!isset($rss_contents[$rss_index-1][$rss_tag]) || !strlen($rss_contents[$rss_index-1][$rss_tag])) ?
 				$rss_contents[$rss_index-1][$rss_tag] = $data :
 				$rss_contents[$rss_index-1][$rss_tag].= $data ;
 		elseif ($rss_isImage && strlen($data))
@@ -266,54 +237,52 @@ function sax_data($parser, $data)
 				$rss_contents['textinput'][$rss_tag].= $data ;
 	}
 }
-///////////////////////////////
-
 
 function getVar($varName, $varDefaultVal) {
-   global $HTTP_GET_VARS, $HTTP_POST_VARS, $HTTP_POST_FILES, $HTTP_COOKIE_VARS;
+	global $HTTP_GET_VARS, $HTTP_POST_VARS, $HTTP_POST_FILES, $HTTP_COOKIE_VARS;
 
-   if (isset($HTTP_GET_VARS[$varName])) {
-      $varVal = $HTTP_GET_VARS[$varName];
-   }
-   elseif (isset($HTTP_POST_VARS[$varName])) {
-      $varVal = $HTTP_POST_VARS[$varName];
-   }
-   elseif (isset($HTTP_POST_FILES[$varName])) {
-      $varVal = $HTTP_POST_FILES[$varName];
-   }
-   elseif (isset($HTTP_COOKIE_VARS[$varName])) {
-      $varVal = $HTTP_COOKIE_VARS[$varName];
-   }
-   else {
-      $varVal = $varDefaultVal;
-   }
+	if (isset($HTTP_GET_VARS[$varName])) {
+		$varVal = $HTTP_GET_VARS[$varName];
+	}
+	elseif (isset($HTTP_POST_VARS[$varName])) {
+		$varVal = $HTTP_POST_VARS[$varName];
+	}
+	elseif (isset($HTTP_POST_FILES[$varName])) {
+		$varVal = $HTTP_POST_FILES[$varName];
+	}
+	elseif (isset($HTTP_COOKIE_VARS[$varName])) {
+		$varVal = $HTTP_COOKIE_VARS[$varName];
+	}
+	else {
+		$varVal = $varDefaultVal;
+	}
 
-   return $varVal;
+	return $varVal;
 }
 
 function write_log ($logentry) {
-   global $logfile;
+	global $logfile;
 
-   if (!$logfile) {
-      $logfile = fopen ("./log.txt", "a");
-   }
-   fwrite($logfile, date("m/d/y h:i:s A - ") . $logentry . "\n");
+	if (!$logfile) {
+		$logfile = fopen ("./log.txt", "a");
+	}
+	fwrite($logfile, date("m/d/y h:i:s A - ") . $logentry . "\n");
 }
 
 function pre_fix($strText) {
 	$strResult = $strText;
-	
+
 	//$strResult = strip_tags($strResult);
-	
+
 	$trans_array = array();
 	for ($i=127; $i<255; $i++) {
 		$trans_array[chr($i)] = "&#" . $i . ";";
 	}
 	$strResult = strtr($strResult, $trans_array);
-	
+
 	$strResult = ltrim($strResult);
 	$strResult = rtrim($strResult);
-	
+
 	return $strResult;
 }
 
@@ -325,19 +294,19 @@ $patterns = array(
 			'/<br \/>/',
 			'/<\/p>/',
 			'/<p.*?>/',
-			
-			'/(.*?)<a.*? href="(.*?http:\/\/.+?)".*?>(.*?)<\/a>(.*?)/',			
-			
+
+			'/(.*?)<a.*? href="(.*?http:\/\/.+?)".*?>(.*?)<\/a>(.*?)/',
+
 			'/<code.*?>(.*?)<\/code>/',
-			'/<img.*?src=".*?".*?[\/]*>/',		
-			
-			'/<blockquote.*?cite="(http:\/\/.+?)".*?>(.*?)<\/blockquote>/',	
+			'/<img.*?src=".*?".*?[\/]*>/',
+
+			'/<blockquote.*?cite="(http:\/\/.+?)".*?>(.*?)<\/blockquote>/',
 			'/<cite.*?>(.*?)<\/cite>/',
-			
+
 			'/<[ou]l*?>(.+?)<\/[ou]l>/',
 			'/<li*?>(.+?)<\/li>/',
 
-			
+
 			'/<span.*?>(.*?)<\/span>/',
 			'/<strong.*?>(.*?)<\/strong>/',
 			'/<b.*?>(.*?)<\/b>/',
@@ -345,28 +314,28 @@ $patterns = array(
 			'/<i.*?>(.*?)<\/i>/',
 			'/,/',
 			'/;/',
-			
+
 			'/&lt;/',
 			'/&gt;/',
 			'/&amp;/',
 			'/&#821[67];/',
 			'/&#822[01];/'
 			);
-			
+
 $replace = array(
-//br and p	
+//br and p
 			"\\n",
 			"\\n\\n",
 			"",
-//a element			
+//a element
 			//"\\1\\3 [link: \\2]\\4",
 			"\\1\\3 [link]\\4",
 //code
 			"\\1",
 //img
 			"[img]\\n",
-//cite=,cite	
-			"\\n\\2[cite: \\1]\\n\\n",			
+//cite=,cite
+			"\\n\\2[cite: \\1]\\n\\n",
 			"[cite]\\1",
 //ul/ol, li
 			"\\n\\1",
@@ -379,15 +348,15 @@ $replace = array(
 			"\\1",
 			"\\,",
 			"\\;",
-			
+
 			"<",
 			">",
 			"&",
 			"'",
 			"\""
 			);
-			
-		
+
+
 $data = preg_replace($patterns, $replace, $data);
 
 $data = strip_tags($data);
@@ -423,7 +392,7 @@ if (strlen($url) == 0) {
 	echo "<LI><A HREF=\"http://" . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'] . "?url=http://rss.com.com/2547-12-0-20.xml&format=*.ics\">CNET News.com</A> [<A HREF=\"webcal://" . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'] . "?url=http://rss.com.com/2547-12-0-20.xml&format=*.ics\">subscribe</A>]</LI>\n";
 	echo "<LI><A HREF=\"http://" . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'] . "?url=http://www.e-queue.com/index.rdf&format=*.ics\">E-Queue</A> [<A HREF=\"webcal://" . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'] . "?url=http://www.e-queue.com/index.rdf&format=*.ics\">subscribe</A>]</LI>\n";
 	echo "<LI><A HREF=\"http://" . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'] . "?url=http://maccentral.macworld.com/mnn.cgi&format=*.ics\">MacCentral</A> [<A HREF=\"webcal://" . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'] . "?url=http://maccentral.macworld.com/mnn.cgi&format=*.ics\">subscribe</A>]</LI>\n";
-	echo "<LI><A HREF=\"http://" . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'] . "?url=http://www.salon.com/feed/RDF/salon_use.rdf&format=*.ics\">Salon</A> [<A HREF=\"webcal://" . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'] . "?url=http://www.salon.com/feed/RDF/salon_use.rdf&format=*.ics\">subscribe</A>]</LI>\n";	
+	echo "<LI><A HREF=\"http://" . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'] . "?url=http://www.salon.com/feed/RDF/salon_use.rdf&format=*.ics\">Salon</A> [<A HREF=\"webcal://" . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'] . "?url=http://www.salon.com/feed/RDF/salon_use.rdf&format=*.ics\">subscribe</A>]</LI>\n";
 	echo "<LI><A HREF=\"http://" . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'] . "?url=http://slashdot.org/slashdot.rss&format=*.ics\">Slashdot</A> [<A HREF=\"webcal://" . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'] . "?url=http://slashdot.org/slashdot.rss&format=*.ics\">subscribe</A>]</LI>\n";
 	echo "<LI><A HREF=\"http://" . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'] . "?url=http://www.wired.com/news_drop/netcenter/netcenter.rdf&format=*.ics\">Wired News</A> [<A HREF=\"webcal://" . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'] . "?url=http://www.wired.com/news_drop/netcenter/netcenter.rdf&format=*.ics\">subscribe</A>]</LI>\n";
 	echo "</UL>\n";
@@ -446,14 +415,14 @@ if ($rssData = parseRSS ( "http://$url")) {
 	$channel_date = pre_fix($rssData["channel"]["dc:date"]);
 	$channel_pubdate = pre_fix($rssData["channel"]["pubdate"]);
 	$channel_lastbuilddate = pre_fix($rssData["channel"]["lastbuilddate"]);
-	
+
 	if (strlen($channel_pubdate) > 0 && (strlen($channel_date) == 0)) {
 		$channel_date = $channel_pubdate;
 	}
 	if (strlen($channel_lastbuilddate) > 0 && (strlen($channel_date) == 0)) {
 		$channel_date = $channel_lastbuilddate;
 	}
-		
+
 	echo "BEGIN:VCALENDAR\n";
 	echo "CALSCALE:GREGORIAN\n";
 	//echo "X-WR-TIMEZONE;VALUE=TEXT:US/Eastern\n";
@@ -476,7 +445,7 @@ if ($rssData = parseRSS ( "http://$url")) {
 		if ((strlen($item_description) > 0) && (strlen($item_title) == 0)) {
 			$item_title = substr($item_description, 0, 30) . "...";
 		}
-		
+
 		$item_date = pre_fix($rssData[$i]["dc:date"]);
 		$item_pubdate = pre_fix($rssData[$i]["pubdate"]);
 		if (strlen($item_pubdate) > 0 && (strlen($item_date) == 0)) {
@@ -484,7 +453,7 @@ if ($rssData = parseRSS ( "http://$url")) {
 		}
 		//If we use the channel date, all entries have the same datetime
 		//This datetime is erroneous because it only applies to the latest item
-		//For now don't use it.  This results in prettier iCal display
+		//For now don't use it. This results in prettier iCal display
 		//if (strlen($channel_date) > 0 && (strlen($item_date) == 0)) {
 			//$item_date = $channel_date;
 		//}
@@ -509,7 +478,7 @@ if ($rssData = parseRSS ( "http://$url")) {
 		else {
 			$item_date = date("Ymd");
 		}
-		
+
 		echo "BEGIN:VEVENT\n";
 		echo "UID:" . md5($item_link . $item_title) . "\n";
 		echo "DTSTAMP;VALUE=DATE:$item_date\n";
@@ -530,7 +499,7 @@ if ($rssData = parseRSS ( "http://$url")) {
 	echo "END:VCALENDAR\n";
 }
 else {
-   echo "Unable to parse RSS feed.";
+	echo "Unable to parse RSS feed.";
 }
 
 }
