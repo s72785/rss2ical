@@ -3,14 +3,17 @@ rss2ical
 
 convert RSS feed to iCal for importing RSS/Atom feeds in calendar solutions easily
 
+* code: [RSS2iCal on github](https://github.com/s72785/rss2ical/)
+* demo: [webservice for any RSS feed to be converted](http://www2.htw-dresden.de/~s72785/rss2ical.php)
+* docu: [the starting point](http://www2.htw-dresden.de/~s72785/stura.ical.php) was [a list of events](http://www.stura.htw-dresden.de/events/RSS) available only as RSS and the wish to change such
 
 Contribution
 ------------
 
 This was started by other people before me, any gratitude should also given to them.
-I got started with a copy from [Edward Swindelles](http://subversion.assembla.com/svn/ejm/include-both/rss2icalinc.php)
+I got started with a copy from [this SVN](http://subversion.assembla.com/svn/ejm/include-both/rss2icalinc.php)
 
-Known contributors:
+Known contributors/predecessors
 
 * Noel David Jackson (noel@noeljackson.com)
 * 2002-2003 Edward Swindelles (ed@readinged.com)
