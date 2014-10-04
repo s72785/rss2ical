@@ -380,7 +380,7 @@ if (strlen($url) == 0) {
 	echo "<ul>\n";
 	echo '<li>code: <a href="https://github.com/s72785/rss2ical/" target="_blank">RSS2iCal on github</a></li>' . "\n";
 	echo '<li>demo: <a href="http://www2.htw-dresden.de/~s72785/rss2ical.php" target="_blank">webservice for any RSS feed to be converted</a></li>' . "\n";
-	echo '<li>docu: <a href="http://www2.htw-dresden.de/~s72785/stura.ical.php" target="_blank">the starting point was a calendar at university available only as RSS</a></li>' . "\n";
+	echo '<li>docu: <a href="http://www2.htw-dresden.de/~s72785/stura.ical.php" target="_blank">the starting point was a calendar at university available only as RSS</a>, <a href="http://tools.ietf.org/html/rfc5545" target="_blank">s.a. RFCfor iCal</a></li>' . "\n";
 	echo "</ul>\n";
 	echo "<HR>\n";
 	echo "<FORM NAME=\"Form_View\" METHOD=GET ACTION=\"http://" . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'] . "\">\n";
