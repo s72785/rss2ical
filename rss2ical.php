@@ -377,7 +377,11 @@ if (strlen($url) == 0) {
 	echo "View and/or Subscribe to RSS/RDF News Feeds in iCalendar (vCal 2.0) format.<P>\n";
 	echo "Subscriptions have only been tested with Apple's iCal application.<P>\n";
 	echo "Once you have subscribed to a news feed in Apple's iCal, iSync can be used to synchronize it with your iPod, Palm, or cell phone.<P>\n";
-	echo "<a href="https://github.com/s72785/rss2ical/" target="_blank">RSS2iCal on github</a>\n";
+	echo "<ul>\n";
+	echo '<li>code: <a href="https://github.com/s72785/rss2ical/" target="_blank">RSS2iCal on github</a></li>' . "\n";
+	echo '<li>demo: <a href="http://www2.htw-dresden.de/~s72785/rss2ical.php" target="_blank">webservice for any RSS feed to be converted</a></li>' . "\n";
+	echo '<li>docu: <a href="http://www2.htw-dresden.de/~s72785/stura.ical.php" target="_blank">the starting point was a calendar at university available only as RSS</a></li>' . "\n";
+	echo "</ul>\n";
 	echo "<HR>\n";
 	echo "<FORM NAME=\"Form_View\" METHOD=GET ACTION=\"http://" . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'] . "\">\n";
 	echo "RSS/RDF URL: <INPUT TYPE=TEXT SIZE=50 NAME=\"url\" VALUE=\"http://www.stura.htw-dresden.de/events/RSS\">\n";
