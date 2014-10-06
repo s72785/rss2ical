@@ -36,7 +36,8 @@ You should have received a copy of the GNU General Public License along with thi
     51 Franklin Street, Fifth Floor
     Boston, MA 02110-1301
     USA
-    [Telephone](http://www.fsf.org/about/contact/extensions): +1-617-542-5942
-    Fax: +1-617-542-2652
-    [FSF Website](http://www.fsf.org/)
-    [email](http://www.fsf.org/about/contact/email)
+    
+[Telephone](http://www.fsf.org/about/contact/extensions): +1-617-542-5942
+Fax: +1-617-542-2652
+[FSF Website](http://www.fsf.org/)
+[email](http://www.fsf.org/about/contact/email)
